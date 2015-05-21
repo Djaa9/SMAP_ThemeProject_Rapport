@@ -1,0 +1,18 @@
+\thispagestyle{fancy}
+\chapter{Implementering}
+\label{chp:Implementering}
+
+\section{Login og deling med Facebook}
+
+\section{Kort og rute tracking}
+For at opfylde kravet om at brugeren løbende skulle kunne følge sin rute på et kort, blev det valgt at anvende Googles Maps API i projektet.
+
+Når brugen har startet gårturen fra IntroActivity, startes WalkingActivity. Walkingactivity er bundet til activity\_walking.xml layoutet. I layoutet placeres en fragment som viser indholdet af MapFragment fra Google Play services. Fragmentet med kortet fylder hele slærmen og ovenpå lægges øverst to textViews som viser hhv. hvor langt burgeren har gået indtil nu og hvor mange penge det svarer til i donation.
+Nederst i layoutet placeres der en knap ovenpå kortet som brugen skal anvendes til at afslutte og gemme gåturens resultat. Når brugen har trykket på knappen startes DoneWalkingActivity som er knyttet til activity\_donewalking.xml som viser gåturens resultat i form af et kort med ruten og det endelig antal kilometer og donerede beløb.
+
+\subsection{WalkingActivity}
+
+WalkingActivity nedarver fra FragmentActivity da den skal holde MapFragment. Herudover implementere den, LocationlListener med metoden onLocationChanged som skal kaldes når Provideren har en ny placering som skal vises på kortet. Den implementere også OnMapReadyCallback, med metoden mapReady som kaldes når kortet i MapFragment er klar til at blive anvendt.
+
+
+\section{Dataopbevaring}
