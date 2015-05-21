@@ -1,24 +1,46 @@
 \thispagestyle{fancy}
 \chapter{Kravspecifikation}
-\label{chp:description}
-Som en del af kurset \emph{Smartphone Applications} udvikles den igennem rapporten beskrevne Android applikation. Der tages udgangspunkt i projektet \emph{In My Steps}, som beskriver en applikation til at motivere kræftpatienter til gå mere. Idéen beskriver hvordan kræftpatienter og deres pårørende igennem en applikation motiveres til at gå ture og dele disse med hinanden. Efter at have gået en tur er tanken at et pengebeløb, baseret på antallet af kilometer, doneres til forskning inden for kræft.
+\label{chp:kravspec}
+
+I følgende kapitel redegøres for kravene som opstilles for projektet. Kravene er baseret på en prioritering, som er vurderes på baggrund af en MoSCoW analyse, som ses i tabel \ref{tab:MosCoW}. Der vil i udviklingsforløbet først fokuseres på MUST kolonnen, herefter SHOULD osv. 
+
+
+\begin{table}[h]
+\begin{tabular}{|>{\rr}p{3.2cm}|>{\rr}p{3.2cm}|>{\rr}p{3.2cm}|p{3.2cm}|} 
+\hline
+\rowcolor{ThemeColor!80}  
+\rowcolor{ThemeColor!80} \vspace{0.2cm}  \textbf{Must} \newline & \vspace{0.2cm}  \textbf{Should} & \vspace{0.2cm}  \textbf{Could} &  \vspace{0.2cm} \textbf{Won't} \\ 
+\hline
+ Visning af afstanden på endt gåtur samt doneret pengebeløb   & Løbende tracking af rute på kort & Mulighed for at optage videorefleksion over gåtur & Notificering hvis ens pårørende har gået en tur \vspace{1cm} \\
+\hline 
+Mulighed for at dele rute med pårørende & Mulighed for at dele distance, rute og doneringsbeløb igennem Facebook &  & Mulighed for at dele refleksionsvideo  \vspace{1cm} \\
+\hline
+ & Historik over ture og tilhørende doneringsbeløb &  &  \\
+\hline
+
+\end{tabular}
+\caption{MoSCoW-analyse}
+\label{tab:MosCoW}
+\end{table}
+\FloatBarrier
+
 
 \section{User stories}
-For at opstille kravene til projektet tages udgangspunkt i user stories for at underbygge den ønskede agile udviklingsprocess.
+Ud fra den opstillede MoSCoW analyse opstilles user stories, som underbygger den ønskede agile udviklingsprocess.
 De opbygges ud fra følgende skabelon: \\
 
 \centerline{Som en <bruger> vil jeg <gøre noget> så <jeg kan opnå>}  \hfill
 
-Som en del af projektet er opstillet følgende 9 user stories:
+I Projektet er det valgt at fokusere på følgende 9 user stories:
 \begin{enumerate}
 
-\item Som en bruger, vil jeg kunne logge på med min Facebook, så at det bliver nemt for at oprette en bruger. 
-\item Som en bruger, vil jeg introduceres til at et pengebeløb doneres baseret på min gåtur. 
 \item Som en bruger, vil jeg kunne starte en gå tur.
-\item Som en bruger, vil jeg kunne følge min gåtur på et kort. 
 \item Som en bruger, vil jeg kunne følge antallet af kilometer jeg har gået. 
 \item Som en bruger vil jeg kunne stoppe gåturen, når jeg er færdig. 
+\item Som en bruger, vil jeg introduceres til at et pengebeløb doneres baseret på min gåtur. 
+\item Som en bruger, vil jeg kunne følge min gåtur på et kort. 
 \item Som en bruger, vil jeg efter endt gåtur kunne se det donerede beløb baseret på min gåtur. 
-\item Som en bruger, vil jeg efter endt gåtur kunne det samlede antal kilometer, som jeg er gået. 
+\item Som en bruger, vil jeg efter endt gåtur kunne se det samlede antal kilometer, som jeg er gået. 
+\item Som en bruger, vil jeg kunne logge på med min Facebook, så at det bliver nemt for at oprette en bruger. 
 \item Som bruger, vil jeg efter endt gåtur kunne dele min gåtur på Facebook, så jeg kan inspirere andre til at gøre det samme. 
 \end{enumerate}
