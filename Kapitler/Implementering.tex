@@ -14,5 +14,17 @@ Nederst i layoutet placeres der en knap ovenpå kortet som brugen skal anvendes 
 
 WalkingActivity nedarver fra FragmentActivity da den skal holde MapFragment. Herudover implementere den, LocationlListener med metoden onLocationChanged som skal kaldes når Provideren har en ny placering som skal vises på kortet. Den implementere også OnMapReadyCallback, med metoden mapReady som kaldes når kortet i MapFragment er klar til at blive anvendt.
 
+Figur \Ref{fig:flow_walkingact} viser hvad der håndteres af de forskellige event handlers. onCreate er fra Activity, og anvendes til setup af klassen tilstand og anmoder om at få et Google maps instance async.
 
+Så snart kortet er klar bliver eventet håndteret af onMapReady kaldt. Denne metode laver noget opsætning af kortets udseende og anmoder om events fra location provideren. onLocationChanged eventet håndteres ved at kortets kamera først gang zoomer ind og centreres over brugeren. Kortets dimensioner beregnes til senere brug.
+
+Det resterende gang eventet håndteres vil brugerens placering blive langt ind i en Polyline som vises på kortet. På den måde kan brugeren følge med i den rute som allerede er gået. Størrelsen på polylines boundsbox beregnes. Når boundsboxen er lige så stor eller større end kortets oprindelige dimension vil kameraet begynde at zoome ud så hele ruten forbliver indenfor kortets rammer.
+
+Brugeren indikere at gåturen er færdig ved at trykke på en knap. Knappens onClick event håndteres af StopWalking metoden. Stop Walking danner et statisk google maps ud fra polylineen og lægger denne i en intent sammen med distancen som er gået og beløbet som skal doneres. Intenten starter DoneWalking Activity, som viser resultatet af gåturen.
+
+\figur{flow_walkingactivity}{Flowchart diagrammer over eventhåndtering i WalkingActivity}{fig:flow_walkingact}{1}
+
+
+
+\FloatBarrier
 \section{Dataopbevaring}
