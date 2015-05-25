@@ -3,6 +3,17 @@
 \label{chp:Implementering}
 
 \section{Login og deling med Facebook}
+I denne applikation benyttes login gennem Facebook, da der derfor ikke skal implementeres noget brugeroprettelsesmodul, fordi denne del håndteres af Facebook. Facebook benyttes derfor som en service, der giver adgang til en række informationer, såsom brugerens unikke id og navn. Derudover tilbydes der mulighed for at dele indhold på brugerens væg, Til at kommunikere med Facebook API’et benyttes Facebook’s egen Facebook SDK for Android, som de selv stiller til rådighed på deres developer portal. Applikationen er blevet oprettet inde på Facebooks developer portal, hvor et Facebook app ID er blevet tildelt. 
+Kilde: https://developers.facebook.com/docs/android
+
+\subsection{LoginActivity}
+Den første activity, som brugeren præsenteres for, er LoginActivity. I OnCreate metoden initialiseres førstFacebook SDK, og tilkobles en callback metode på en login knap i layoutet. Denne knap er af typen LoginButton, og loginfunktionaliteten er på forhånd implementeret af Facebook SDK. Når brugeren klikker på knappen føres denne videre til et Facebook loginvindue, hvor der kan logges ind med email og adgangskode. Herefter skal brugeren godkende brugen i applikationen (der bedes kun om adgang til den offentlige profil). Når brugeren er logget ind sørger den tilkoblede callback metode for at sende brugeren videre til IntroActivity.
+
+Hvis brugeren går ud af applikationen og åbner applikationen igen vil OnCreate metoden tjekke op på, om brugeren allerede er logget ind, og hvis dette er tilfældet, sendes denne automatisk videre til IntroActivity. Der tjekkes op på, om brugeren er logget ind, ved at kalde metoden: ”Profile.getCurrentProfile()”. Hvis denne returnerer null, er brugeren ikke logget ind, og ellers returneres en Profile-instans, hvorfra oplysninger som navn og id kan læses fra.
+\subsection{WalkDoneActivity}
+Når en gåtur afsluttes vises WalkDoneActivity, der fra WalkingActivity gennem en intent modtager oplysninger om turens længde, donationens størrelse samt en URL til et billede af turens rute på et kort. For at vise dette kort med ruten på WalkDoneActivity, skal billedet fra URL’en hentes ned som en Drawable, der kan vises i et ImageView. Da billedet skal hentes fra internettet, bliver dette nødt til at blive gjort på en anden tråd, således at den krævede ventetid for at hente billedet ikke bremser user interfacets hovedtråd. Derfor benyttes en async task (LoadMapFromUrlTask) til at håndtere dette.
+
+Selve delefunktionaliteten på Facebook håndteres af Facebook SDK, hvor et tryk på en knap åbner et eksternt vindue fra Facebook med mulighed for at dele foruddefineret indhold gennem en ShareLinkContent. Dette indhold består af en tekst hvori donationsstørrelsen og turlængden indgår, samt URL’en til kortet med ruten, som på Facebook vil blive opslået som et billede. Ligesom ved log in er dette Facebook share koblet på en callback metode, der sørger for at lukke activity’en ned og sende brugeren tilbage til IntroActivity, når indholdet er blevet delt.
 
 \section{Kort og rute tracking}
 For at opfylde kravet om at brugeren løbende skulle kunne følge sin rute på et kort, blev det valgt at anvende Googles Maps API i projektet.
