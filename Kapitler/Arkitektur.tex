@@ -3,6 +3,10 @@
 \label{chp:description}
 
 \section{Arkitektur}
-Den overordnede arkitektur for Applikationen beskrives i \ref{UMLCom}. Applikationen \emph{In My Steps} kører på en android enhed, og kommunikerer med Google Cloud og Facebook.
+Den overordnede arkitektur for Applikationen beskrives i figur \ref{UMLCom}. Applikationen \emph{In My Steps} kører på en android enhed, og kommunikerer med Google Cloud og Facebook.
+
+I den valgte arkitektur for applikationen har fokus været på skalerbarhed, og det er herfor valgt at benytte Facebooks API til login og deling af gåture. Facebook giver muligheden for at benytte et fast defineret API til loginsystem samt mulighed for at dele en gåtur med venner. Facebooks tilbyder samme let tilgængelige API for andre platforme, hvis det skulle ønskes at udvikle applikationen ekstempeltvist iPhone.
+
+Det vælges ligeledes med skalerbarhed for øje at benytte Google Cloud som backend og til dataopbevaring. Her udvikles en samlet backend til opbevaring af data om gåture og donationer. Ved at benytte Google Cloud sikres muligheden for at andre platforme kan benytte samme backend. 
 
 \figur{Componentdiagram_systemet}{UML Component Model}{UMLCom}{1}
