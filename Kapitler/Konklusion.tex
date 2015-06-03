@@ -1,3 +1,14 @@
 \thispagestyle{fancy}
 \chapter{Konklusion}
 \label{chp:Konklusion}
+Med udgangspunkt i kravspecifikationen, vil der i dette kapitel blive konkluderet på hvorvidt udviklingsprocessen og delimplementeringerne samlet opfylder kravspecifikationen. Konklusionen på opfyldelse af egen kravspecifikation vil blive suppleret med en refleksion over læringsprocessen og den tilegnede viden, i henhold til læringsmålene for faget og de formelle krav til smartphone applikationen.
+
+Det er lykkedes i dette projekt at udarbejde en fuldt funktionel Android applikation som opfylder samtlige \emph{must} og \emph{should} krav, med en enkelt undtagelse. Eftersom at der i dette projekt udelukkende har været arbejdet med design og teknisk implementering, er det ikke lykkedes at opfylde kravet om at brugeren rent faktisk kan donere penge ved hjælp af sine gåture. For at dette krav fuldt ud skulle kunne indfries ville det både kræve at der efterfølgende blev indhentet sponsorer og at der blev udarbejdet en logistisk procedure for transaktioner af de donerede beløb.
+
+I forhold til selve applikationen er vi nået i mål med samtlige user stories. Det er således muligt at logge ind i applikationen ved hjælp af sin Facebookkonto hvorefter man kan starte en gåtur og løbende se sin rute på et kort. Samtidig kan brugeren se hvor mange km., der er gået og hvor mange penge det svarer til i donationer. Når brugeren er færdig med at gå, kan brugeren afslutte turen, se sit resultat og dele det med andre brugere på Facebook. 
+
+Der er desuden lavet et stykke forberedende arbejde i forhold til at gemme statistiske oplysninger centralt på en Google Cloud hostet service. Det er lykkedes at sende en HTTP anmodning fra vores applikation til en RESTful service, som vi selv har konfigureret. Det er ikke lykkedes at få denne service til at gemme de modtagende data i en SQL database, som vi har opsat ved Google.
+
+\subsection{Refleksion}
+Applikationen er på grund af projektperioden forløbstid udarbejdet gennem en enkel iteration, hvor vi har samarbejdet om en fælles kodebase i et git repository. Simple principper for continous integration er anvendt således at funktioner har kunne uddelegeres og delimplementeres. Det er således lykkedes at skabe en proces hvor integration har givet overraskende få problemer. Vi har arbejdet med Android frameworket i Android studio. Herudover er Google Services blevet anvendt til fremvisning af kort og til vores backend bestående af en RESTful service.
+
