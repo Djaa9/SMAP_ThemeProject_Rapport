@@ -11,6 +11,7 @@ Den første activity, som brugeren præsenteres for, er LoginActivity. I OnCreat
 
 For at få adgang til de offentlige oplysninger for den bruger, der på nuværende tidspunkt er logget ind, benyttes metoden ”Profile.getCurrentProfile()”. Hvis denne returnerer null, er brugeren ikke logget ind, og ellers returneres en Profile-instans, hvorfra oplysninger som navn og id kan læses fra.
 
+\figur{flow_loginactivity.png}{Flowchart diagrammer over eventhåndtering i LoginActivity}{fig:flow_loginact}{1}
 
 \subsection{WalkDoneActivity}
 Når en gåtur afsluttes vises WalkDoneActivity, der fra WalkingActivity gennem en intent modtager oplysninger om turens længde, donationens størrelse samt en URL til et billede af turens rute på et kort. For at vise dette kort med ruten på WalkDoneActivity, skal billedet fra URL’en hentes ned som en Drawable, der kan vises i et ImageView. Da billedet skal hentes fra internettet, bliver dette nødt til at blive gjort på en anden tråd, således at den krævede ventetid for at hente billedet ikke bremser user interfacets hovedtråd. Derfor benyttes en async task (LoadMapFromUrlTask) til at håndtere dette.
