@@ -3,8 +3,7 @@
 \label{chp:Implementering}
 
 \section{Login og deling med Facebook}
-I denne applikation benyttes login gennem Facebook, da der derfor ikke skal implementeres noget selvudviklet brugeroprettelsesmodul, fordi denne del håndteres af Facebook. Facebook benyttes derfor som en service, der giver adgang til en række informationer, såsom brugerens unikke id og navn. Derudover tilbydes der mulighed for at dele indhold på brugerens væg, Til at kommunikere med Facebook API’et benyttes Facebook’s egen Facebook SDK for Android, som de selv stiller til rådighed på deres developer portal. Applikationen er blevet oprettet inde på Facebooks developer portal, hvor et Facebook app ID er blevet tildelt. 
-Kilde: https://developers.facebook.com/docs/android
+I denne applikation benyttes login gennem Facebook, da der derfor ikke skal implementeres noget selvudviklet brugeroprettelsesmodul, fordi denne del håndteres af Facebook. Facebook benyttes derfor som en service, der giver adgang til en række informationer, såsom brugerens unikke id og navn. Derudover tilbydes der mulighed for at dele indhold på brugerens væg, Til at kommunikere med Facebook API’et benyttes Facebook’s eget SDK til Android, som de stiller til rådighed på deres developer portal. Applikationen er blevet oprettet inde på Facebooks developer portal, hvor et Facebook app ID er blevet tildelt \footnote{Kilde: https://developers.facebook.com/docs/android}.
 
 \subsection{LoginActivity}
 Den første activity, som brugeren præsenteres for, er LoginActivity. I OnCreate metoden initialiseres først Facebook SDK og tilkobles en callback metode på en login knap i layoutet. Denne knap er af typen LoginButton, og loginfunktionaliteten er på forhånd implementeret af Facebook SDK. Når brugeren klikker på knappen føres denne videre til et Facebook loginvindue, hvor der kan logges ind med email og adgangskode. Herefter skal brugeren godkende brugen i applikationen (der bedes kun om adgang til den offentlige profil). Der er også implemeteret en ProfileTracker, der automatisk holder øje med, om brugeren logger ind eller ud, og baseret på dette ændrer den forklaringsteksten. Når brugeren logger ind, sørger ProfileTrackeren også for at IntroActivity åbnes.
@@ -25,10 +24,11 @@ Når brugen har startet gåturen fra IntroActivity, startes WalkingActivity. Wal
 Nederst i layoutet placeres der en knap ovenpå kortet som brugen skal anvendes til at afslutte og gemme gåturens resultat. Når brugen har trykket på knappen startes DoneWalkingActivity som er knyttet til activity\_donewalking.xml som viser gåturens resultat i form af et kort med ruten og det endelig antal kilometer og donerede beløb.
 
 \subsection{WalkingActivity}
-
 WalkingActivity nedarver fra FragmentActivity da den skal holde MapFragment. Herudover implementere den, LocationlListener med metoden onLocationChanged som skal kaldes når Provideren har en ny placering som skal vises på kortet. Den implementere også OnMapReadyCallback, med metoden mapReady som kaldes når kortet i MapFragment er klar til at blive anvendt.
 
 Figur \Ref{fig:flow_walkingact} viser hvad der håndteres af de forskellige event handlers. onCreate er fra Activity, og anvendes til setup af klassen tilstand og anmoder om at få et Google maps instance async.
+
+\figur{flow_walkingactivity}{Flowchart diagrammer over eventhåndtering i WalkingActivity}{fig:flow_walkingact}{1}
 
 Så snart kortet er klar bliver eventet håndteret af onMapReady kaldt. Denne metode laver noget opsætning af kortets udseende og anmoder om events fra location provideren. onLocationChanged eventet håndteres ved at kortets kamera først gang zoomer ind og centreres over brugeren. Kortets dimensioner beregnes til senere brug.
 
@@ -36,19 +36,18 @@ Det resterende gang eventet håndteres vil brugerens placering blive langt ind i
 
 Brugeren indikere at gåturen er færdig ved at trykke på en knap. Knappens onClick event håndteres af StopWalking metoden. Stop Walking danner et statisk google maps ud fra polylineen og lægger denne i en intent sammen med distancen som er gået og beløbet som skal doneres. Intenten starter DoneWalking Activity, som viser resultatet af gåturen.
 
-\figur{flow_walkingactivity}{Flowchart diagrammer over eventhåndtering i WalkingActivity}{fig:flow_walkingact}{1}
-
-
-
 \FloatBarrier
 \section{Dataopbevaring}
-For at kunne opfylde kravet om at præsentere brugeren for det samlede antal kilometer en bruger har gået igennem tiden, er der behov for at gemme alle gåturene. Til dette er der valgt at bruge en database. Med alle gåturene samlet i en database er der mulighed for at se en brugers samlede gåture og dermed samlede antal kilometer. Disse vil kunne omregnes til det samlede beløb en bruger har doneret.\\
-%
+For at kunne opfylde kravet om at præsentere brugeren for det samlede antal kilometer en bruger har gået igennem tiden, er der behov for at gemme alle gåturene. Til dette er der valgt at bruge en database. Med alle gåturene samlet i en database er der mulighed for at se en brugers samlede gåture og dermed samlede antal kilometer. Disse vil kunne omregnes til det samlede beløb en bruger har doneret.
+
 \figur{db_table}{Screendump der viser database tabellen.}{fig:db_table}{0.7}
-%
+
+\noindent
 Databasen består af en tabel som der ses et billede af på figur \ref{fig:db_table}. I denne gemmes alle gåture som en post enkeltvis. Hver post i tabellen indeholder et unikt tur ID, et bruger ID, længden på turen og et tidstempel.
-Det unikke tur ID, i tabellen \emph{id}, bruges også som primære nøgle i databasen. Dette betyder at databasen selv tildeler et tur ID når der tilføjes en post. Bruger ID, i tabellen \emph{fbID}, er brugerens unikke Facebook ID. Dette er et unikt helt tal som hvert personlig profil på facebook har fået tildelt ved oprettelsen. Turenslængde, i tabellen \emph{length}, gemmes i meter med 2 decimaler, således præcisionen er i cm. Tidstemplet, \emph{timeStamp}, tildeles også automatisk af database systemet og består af en dato og et tidspunkt.\\
+
+Det unikke tur ID, i tabellen \emph{id}, bruges også som primære nøgle i databasen. Dette betyder at databasen selv tildeler et tur ID når der tilføjes en post. Bruger ID, i tabellen \emph{fbID}, er brugerens unikke Facebook ID. Dette er et unikt helt tal som hvert personlig profil på facebook har fået tildelt ved oprettelsen. Turenslængde, i tabellen \emph{length}, gemmes i meter med 2 decimaler, således præcisionen er i cm. Tidstemplet, \emph{timeStamp}, tildeles også automatisk af database systemet og består af en dato og et tidspunkt.
 
 Til server er det valgt at bruge Google Cloud Platform. Dette medfører at der ikke skal tænkes på server opsætning samt installering og vedligehold af diverse værktøjer. Derudover er en online, central database at foretrække, da der skal være en hvis sikkerhed, da der arbejdes med donationer.
-Google Cloud Platform opsættes og styres via deres webinterface.\\
+Google Cloud Platform opsættes og styres via deres webinterface.
+
 Applikationen der kører på Android systemet, kommunikere ikke direkte med MySQL serveren. Istedet er der kodet et lille stykke Java software som udgør en Backend. Applikationen kommunikere via HTTP forespørgsler med server Backend applikationen. Denne vil så kommunikere med MySQL databasen via sproget SQL.
