@@ -7,7 +7,7 @@ I denne applikation benyttes login gennem Facebook, da der derfor ikke skal impl
 Kilde: https://developers.facebook.com/docs/android
 
 \subsection{LoginActivity}
-Den første activity, som brugeren præsenteres for, er LoginActivity. I OnCreate metoden initialiseres førstFacebook SDK, og tilkobles en callback metode på en login knap i layoutet. Denne knap er af typen LoginButton, og loginfunktionaliteten er på forhånd implementeret af Facebook SDK. Når brugeren klikker på knappen føres denne videre til et Facebook loginvindue, hvor der kan logges ind med email og adgangskode. Herefter skal brugeren godkende brugen i applikationen (der bedes kun om adgang til den offentlige profil). Der er også implemeteret en ProfileTracker, der automatisk holder øje med, om brugeren logger ind eller ud, og baseret på dette ændrer den forklaringsteksten. Når brugeren logger ind, sørger ProfileTrackeren også for at IntroActivity åbnes.
+Den første activity, som brugeren præsenteres for, er LoginActivity. I OnCreate metoden initialiseres først Facebook SDK og tilkobles en callback metode på en login knap i layoutet. Denne knap er af typen LoginButton, og loginfunktionaliteten er på forhånd implementeret af Facebook SDK. Når brugeren klikker på knappen føres denne videre til et Facebook loginvindue, hvor der kan logges ind med email og adgangskode. Herefter skal brugeren godkende brugen i applikationen (der bedes kun om adgang til den offentlige profil). Der er også implemeteret en ProfileTracker, der automatisk holder øje med, om brugeren logger ind eller ud, og baseret på dette ændrer den forklaringsteksten. Når brugeren logger ind, sørger ProfileTrackeren også for at IntroActivity åbnes.
 
 For at få adgang til de offentlige oplysninger for den bruger, der på nuværende tidspunkt er logget ind, benyttes metoden ”Profile.getCurrentProfile()”. Hvis denne returnerer null, er brugeren ikke logget ind, og ellers returneres en Profile-instans, hvorfra oplysninger som navn og id kan læses fra.
 
@@ -21,7 +21,7 @@ Selve delefunktionaliteten på Facebook håndteres af Facebook SDK, hvor et tryk
 \section{Kort og rute tracking}
 For at opfylde kravet om at brugeren løbende skulle kunne følge sin rute på et kort, blev det valgt at anvende Googles Maps API i projektet.
 
-Når brugen har startet gårturen fra IntroActivity, startes WalkingActivity. Walkingactivity er bundet til activity\_walking.xml layoutet. I layoutet placeres en fragment som viser indholdet af MapFragment fra Google Play services. Fragmentet med kortet fylder hele slærmen og ovenpå lægges øverst to textViews som viser hhv. hvor langt burgeren har gået indtil nu og hvor mange penge det svarer til i donation.
+Når brugen har startet gåturen fra IntroActivity, startes WalkingActivity. Walkingactivity er bundet til activity\_walking.xml layoutet. I layoutet placeres en fragment som viser indholdet af MapFragment fra Google Play services. Fragmentet med kortet fylder hele slærmen og ovenpå lægges øverst to textViews som viser hhv. hvor langt burgeren har gået indtil nu og hvor mange penge det svarer til i donation.
 Nederst i layoutet placeres der en knap ovenpå kortet som brugen skal anvendes til at afslutte og gemme gåturens resultat. Når brugen har trykket på knappen startes DoneWalkingActivity som er knyttet til activity\_donewalking.xml som viser gåturens resultat i form af et kort med ruten og det endelig antal kilometer og donerede beløb.
 
 \subsection{WalkingActivity}
