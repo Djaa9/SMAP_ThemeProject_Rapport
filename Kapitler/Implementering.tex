@@ -43,8 +43,11 @@ Brugeren indikere at gåturen er færdig ved at trykke på en knap. Knappens onC
 \FloatBarrier
 \section{Dataopbevaring}
 For at kunne opfylde kravet om at præsentere brugeren for det samlede antal kilometer en bruger har gået igennem tiden, er der behov for at gemme alle gåturene. Til dette er der valgt at bruge en database. Med alle gåturene samlet i en database er der mulighed for at se en brugers samlede gåture og dermed samlede antal kilometer. Disse vil kunne omregnes til det samlede beløb en bruger har doneret.\\
-Databasen består af en tabel. I denne gemmes alle gåture som en post enkeltvis. Hver post i tabellen indeholder et unikt tur ID, et bruger ID, længden på turen og et tidstempel.
-Det unikke tur ID bruges også som primære nøgle i databasen. Dette betyder at databasen selv tildeler et tur ID når der tilføjes en post. Bruger ID er brugerens unikke Facebook ID. Dette er et unikt helt tal som hvert personlig profil på facebook har fået tildelt ved oprettelsen. Turenslængde gemmes i meter med 2 decimaler, således præcisionen er i cm. Tidstemplet tildeles også automatisk af database systemet og består af en dato og et tidspunkt.\\
+%
+\figur{db_table}{Screendump der viser database tabellen.}{fig:db_table}{0.7}
+%
+Databasen består af en tabel som der ses et billede af på figur \ref{fig:db_table}. I denne gemmes alle gåture som en post enkeltvis. Hver post i tabellen indeholder et unikt tur ID, et bruger ID, længden på turen og et tidstempel.
+Det unikke tur ID, i tabellen \emph{id}, bruges også som primære nøgle i databasen. Dette betyder at databasen selv tildeler et tur ID når der tilføjes en post. Bruger ID, i tabellen \emph{fbID}, er brugerens unikke Facebook ID. Dette er et unikt helt tal som hvert personlig profil på facebook har fået tildelt ved oprettelsen. Turenslængde, i tabellen \emph{length}, gemmes i meter med 2 decimaler, således præcisionen er i cm. Tidstemplet, \emph{timeStamp}, tildeles også automatisk af database systemet og består af en dato og et tidspunkt.\\
 
 Til server er det valgt at bruge Google Cloud Platform. Dette medfører at der ikke skal tænkes på server opsætning samt installering og vedligehold af diverse værktøjer. Derudover er en online, central database at foretrække, da der skal være en hvis sikkerhed, da der arbejdes med donationer.
 Google Cloud Platform opsættes og styres via deres webinterface.\\
